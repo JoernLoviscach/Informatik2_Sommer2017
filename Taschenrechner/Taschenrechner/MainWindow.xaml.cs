@@ -21,6 +21,9 @@ namespace Taschenrechner
     public partial class MainWindow : Window
     {
         int aktuellerWert = 0;
+        int letztesErgebnis = 0;
+        bool zahleneingabeLäuft = true;
+        char letzteRechenoperation = '=';
 
         public MainWindow()
         {
@@ -29,7 +32,15 @@ namespace Taschenrechner
 
         private void ZifferAnhängen(int z)
         {
-            aktuellerWert = aktuellerWert * 10 + z;
+            if(zahleneingabeLäuft)
+            {
+                aktuellerWert = aktuellerWert * 10 + z;
+            }
+            else
+            {
+                aktuellerWert = z;
+                zahleneingabeLäuft = true;
+            }
             textBlockAusgabe.Text = aktuellerWert.ToString();
         }
 
@@ -83,29 +94,55 @@ namespace Taschenrechner
             ZifferAnhängen(9);
         }
 
+        private void Rechne(char rechenoperation)
+        {
+            switch (letzteRechenoperation)
+            {
+                case '+':
+                    letztesErgebnis = letztesErgebnis + aktuellerWert;
+                    break;
+                case '-':
+                    letztesErgebnis = letztesErgebnis - aktuellerWert;
+                    break;
+                case '*':
+                    letztesErgebnis = letztesErgebnis * aktuellerWert;
+                    break;
+                case '/':
+                    letztesErgebnis = letztesErgebnis / aktuellerWert;
+                    break;
+                case '=':
+                    letztesErgebnis = aktuellerWert;
+                    break;
+            }
+            textBlockAusgabe.Text = letztesErgebnis.ToString();
+            zahleneingabeLäuft = false;
+            letzteRechenoperation = rechenoperation;
+        }
+
         private void ButtonPlus_Click(object sender, RoutedEventArgs e)
         {
-
+            Rechne('+');
         }
 
         private void ButtonMinus_Click(object sender, RoutedEventArgs e)
         {
-
+            Rechne('-');
         }
 
         private void ButtonMal_Click(object sender, RoutedEventArgs e)
         {
-
+            Rechne('*');
         }
 
         private void ButtonGeteilt_Click(object sender, RoutedEventArgs e)
         {
-
+            Rechne('/');
         }
 
         private void ButtonGleich_Click(object sender, RoutedEventArgs e)
         {
-
+            zahleneingabeLäuft = false;
+            letzteRechenoperation = '=';
         }
     }
 }
