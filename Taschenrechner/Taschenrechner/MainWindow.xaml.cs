@@ -111,6 +111,7 @@ namespace Taschenrechner
                     letztesErgebnis = letztesErgebnis / aktuellerWert;
                     break;
                 case '=':
+                    // TODO: Gleichheitszeichen mehrfach drücken?!
                     letztesErgebnis = aktuellerWert;
                     break;
             }
@@ -141,8 +142,7 @@ namespace Taschenrechner
 
         private void ButtonGleich_Click(object sender, RoutedEventArgs e)
         {
-            zahleneingabeLäuft = false;
-            letzteRechenoperation = '=';
+            Rechne('=');
         }
     }
 }
