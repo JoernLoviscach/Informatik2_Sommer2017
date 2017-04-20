@@ -27,64 +27,85 @@ namespace Taschenrechner
             InitializeComponent();
         }
 
+        private void ZifferAnhängen(int z)
+        {
+            aktuellerWert = aktuellerWert * 10 + z;
+            textBlockAusgabe.Text = aktuellerWert.ToString();
+        }
+
         private void Button0_Click(object sender, RoutedEventArgs e)
         {
-            aktuellerWert = aktuellerWert * 10;
-            textBlockAusgabe.Text = aktuellerWert.ToString();
+            ZifferAnhängen(0);
         }
 
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
-            aktuellerWert = aktuellerWert * 10 + 1;
-            textBlockAusgabe.Text = aktuellerWert.ToString();
+            ZifferAnhängen(1);
         }
 
         private void Button2_Click(object sender, RoutedEventArgs e)
         {
-            aktuellerWert = aktuellerWert * 10 + 2;
-            textBlockAusgabe.Text = aktuellerWert.ToString();
+            ZifferAnhängen(2);
         }
 
         private void Button3_Click(object sender, RoutedEventArgs e)
         {
-            aktuellerWert = aktuellerWert * 10 + 3;
-            textBlockAusgabe.Text = aktuellerWert.ToString();
+            ZifferAnhängen(3);
         }
 
         private void Button4_Click(object sender, RoutedEventArgs e)
         {
-            aktuellerWert = aktuellerWert * 10 + 4;
-            textBlockAusgabe.Text = aktuellerWert.ToString();
+            ZifferAnhängen(4);
         }
 
         private void Button5_Click(object sender, RoutedEventArgs e)
         {
-            aktuellerWert = aktuellerWert * 10 + 5;
-            textBlockAusgabe.Text = aktuellerWert.ToString();
+            ZifferAnhängen(5);
         }
 
         private void Button6_Click(object sender, RoutedEventArgs e)
         {
-            aktuellerWert = aktuellerWert * 10 + 6;
-            textBlockAusgabe.Text = aktuellerWert.ToString();
+            ZifferAnhängen(6);
         }
 
         private void Button7_Click(object sender, RoutedEventArgs e)
         {
-            aktuellerWert = aktuellerWert * 10 + 7;
-            textBlockAusgabe.Text = aktuellerWert.ToString();
+            ZifferAnhängen(7);
         }
 
         private void Button8_Click(object sender, RoutedEventArgs e)
         {
-            aktuellerWert = aktuellerWert * 10 + 8;
-            textBlockAusgabe.Text = aktuellerWert.ToString();
+            ZifferAnhängen(8);
         }
 
         private void Button9_Click(object sender, RoutedEventArgs e)
-        {//test
-            aktuellerWert = aktuellerWert * 10 + 9;
-            textBlockAusgabe.Text = aktuellerWert.ToString();
+        {
+            ZifferAnhängen(9);
+        }
+
+        private void ButtonPlus_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonMinus_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonMal_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonGeteilt_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonGleich_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

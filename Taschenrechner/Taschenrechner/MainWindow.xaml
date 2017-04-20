@@ -31,5 +31,12 @@
         <Button Content="3" Grid.Column="2" Grid.Row="3" Click="Button3_Click"/>
         <Button Content="0" Grid.Column="0" Grid.Row="4" Click="Button0_Click" Grid.ColumnSpan="2"/>
         <TextBlock x:Name="textBlockAusgabe" Text="0" Grid.ColumnSpan="4" FontSize="40" />
+        <Button Content="+" Grid.Column="3" Grid.Row="4" Click="ButtonPlus_Click" />
+        <Button Content="-" Grid.Column="3" Grid.Row="3" Click="ButtonMinus_Click" />
+        <Button Content="*" Grid.Column="3" Grid.Row="2" 
+          Click="ButtonMal_Click" />
+        <Button Content="/" Grid.Column="3" Grid.Row="1"
+          Click="ButtonGeteilt_Click" />
+        <Button Content="=" Grid.Column="2" Grid.Row="4" Click="ButtonGleich_Click"  />
     </Grid>
 </Window>
