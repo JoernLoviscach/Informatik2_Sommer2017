@@ -82,7 +82,7 @@ namespace Taschenrechner
         }
 
         private void Button9_Click(object sender, RoutedEventArgs e)
-        {
+        {//test
             aktuellerWert = aktuellerWert * 10 + 9;
             textBlockAusgabe.Text = aktuellerWert.ToString();
         }
