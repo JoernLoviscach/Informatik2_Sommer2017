@@ -30,5 +30,6 @@
         <Button Content="2" Grid.Column="1" Grid.Row="3" Click="Button2_Click"/>
         <Button Content="3" Grid.Column="2" Grid.Row="3" Click="Button3_Click"/>
         <Button Content="0" Grid.Column="0" Grid.Row="4" Click="Button0_Click" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="textBlockAusgabe" Text="0" Grid.ColumnSpan="4" FontSize="40" />
     </Grid>
 </Window>

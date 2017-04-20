@@ -20,6 +20,8 @@ namespace Taschenrechner
     /// </summary>
     public partial class MainWindow : Window
     {
+        int aktuellerWert = 0;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -27,42 +29,62 @@ namespace Taschenrechner
 
         private void Button0_Click(object sender, RoutedEventArgs e)
         {
+            aktuellerWert = aktuellerWert * 10;
+            textBlockAusgabe.Text = aktuellerWert.ToString();
         }
 
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
+            aktuellerWert = aktuellerWert * 10 + 1;
+            textBlockAusgabe.Text = aktuellerWert.ToString();
         }
 
         private void Button2_Click(object sender, RoutedEventArgs e)
         {
+            aktuellerWert = aktuellerWert * 10 + 2;
+            textBlockAusgabe.Text = aktuellerWert.ToString();
         }
 
         private void Button3_Click(object sender, RoutedEventArgs e)
         {
+            aktuellerWert = aktuellerWert * 10 + 3;
+            textBlockAusgabe.Text = aktuellerWert.ToString();
         }
 
         private void Button4_Click(object sender, RoutedEventArgs e)
         {
+            aktuellerWert = aktuellerWert * 10 + 4;
+            textBlockAusgabe.Text = aktuellerWert.ToString();
         }
 
         private void Button5_Click(object sender, RoutedEventArgs e)
         {
+            aktuellerWert = aktuellerWert * 10 + 5;
+            textBlockAusgabe.Text = aktuellerWert.ToString();
         }
 
         private void Button6_Click(object sender, RoutedEventArgs e)
         {
+            aktuellerWert = aktuellerWert * 10 + 6;
+            textBlockAusgabe.Text = aktuellerWert.ToString();
         }
 
         private void Button7_Click(object sender, RoutedEventArgs e)
         {
+            aktuellerWert = aktuellerWert * 10 + 7;
+            textBlockAusgabe.Text = aktuellerWert.ToString();
         }
 
         private void Button8_Click(object sender, RoutedEventArgs e)
         {
+            aktuellerWert = aktuellerWert * 10 + 8;
+            textBlockAusgabe.Text = aktuellerWert.ToString();
         }
 
         private void Button9_Click(object sender, RoutedEventArgs e)
         {
+            aktuellerWert = aktuellerWert * 10 + 9;
+            textBlockAusgabe.Text = aktuellerWert.ToString();
         }
     }
 }
