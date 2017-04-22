@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace Taschenrechner
 {
-    /// <summary>
-    /// Interaktionslogik für MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         int aktuellerWert = 0;
@@ -112,6 +109,7 @@ namespace Taschenrechner
                     break;
                 case '=':
                     // TODO: Gleichheitszeichen mehrfach drücken?!
+                    // TODO: +, -, *, / direkt nach Gleichheitszeichen?!
                     letztesErgebnis = aktuellerWert;
                     break;
             }
