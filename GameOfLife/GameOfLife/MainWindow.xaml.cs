@@ -16,27 +16,16 @@ using System.Windows.Threading;
 
 namespace GameOfLife
 {
-    /// <summary>
-    /// Interaktionslogik für MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
 
-            timer.Interval = TimeSpan.FromSeconds(0.1);
-            timer.Tick += Timer_Tick;
-        }
-
-        const int anzahlZellenBreit = 80;
-        const int anzahlZellenHoch = 80;
-        Rectangle[,] felder = new Rectangle[anzahlZellenBreit, anzahlZellenHoch];
-        DispatcherTimer timer = new DispatcherTimer();
-
-        private void ButtonStart_Click(object sender, RoutedEventArgs e)
-        {
             Random würfel = new Random();
+
+            zeichenfläche.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+            zeichenfläche.Arrange(new Rect(0.0, 0.0, zeichenfläche.DesiredSize.Width, zeichenfläche.DesiredSize.Height));
 
             for (int i = 0; i < anzahlZellenHoch; i++)
             {
@@ -54,7 +43,15 @@ namespace GameOfLife
                     felder[i, j] = r;
                 }
             }
+
+            timer.Interval = TimeSpan.FromSeconds(0.1);
+            timer.Tick += Timer_Tick;
         }
+
+        const int anzahlZellenBreit = 30;
+        const int anzahlZellenHoch = 30;
+        Rectangle[,] felder = new Rectangle[anzahlZellenBreit, anzahlZellenHoch];
+        DispatcherTimer timer = new DispatcherTimer();
 
         private void R_MouseDown(object sender, MouseButtonEventArgs e)
         {
