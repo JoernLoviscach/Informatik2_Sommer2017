@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace GameOfLife
 {
@@ -23,14 +24,20 @@ namespace GameOfLife
         public MainWindow()
         {
             InitializeComponent();
+
+            timer.Interval = TimeSpan.FromSeconds(0.1);
+            timer.Tick += Timer_Tick;
         }
 
-        const int anzahlZellenBreit = 30;
-        const int anzahlZellenHoch = 30;
+        const int anzahlZellenBreit = 80;
+        const int anzahlZellenHoch = 80;
         Rectangle[,] felder = new Rectangle[anzahlZellenBreit, anzahlZellenHoch];
+        DispatcherTimer timer = new DispatcherTimer();
 
         private void ButtonStart_Click(object sender, RoutedEventArgs e)
         {
+            Random würfel = new Random();
+
             for (int i = 0; i < anzahlZellenHoch; i++)
             {
                 for (int j = 0; j < anzahlZellenBreit; j++)
@@ -38,7 +45,7 @@ namespace GameOfLife
                     Rectangle r = new Rectangle();
                     r.Width = zeichenfläche.ActualWidth / anzahlZellenBreit - 2.0;
                     r.Height = zeichenfläche.ActualHeight / anzahlZellenHoch - 2.0;
-                    r.Fill = Brushes.Cyan;
+                    r.Fill = (würfel.Next(0, 2) == 1) ? Brushes.Cyan : Brushes.Red;
                     zeichenfläche.Children.Add(r);
                     Canvas.SetLeft(r, j * zeichenfläche.ActualWidth / anzahlZellenBreit);
                     Canvas.SetTop(r, i * zeichenfläche.ActualHeight / anzahlZellenHoch);
@@ -55,7 +62,7 @@ namespace GameOfLife
                 (((Rectangle)sender).Fill == Brushes.Cyan) ? Brushes.Red : Brushes.Cyan;
         }
 
-        private void ButtonNächster_Click(object sender, RoutedEventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
         {
             int[,] anzahlNachbarn = new int[anzahlZellenHoch, anzahlZellenBreit];
             for (int i = 0; i < anzahlZellenHoch; i++)
@@ -111,6 +118,20 @@ namespace GameOfLife
                         felder[i, j].Fill = Brushes.Red;
                     }
                 }
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if(timer.IsEnabled)
+            {
+                timer.Stop();
+                buttonStartStop.Content = "Starte Animation!";
+            }
+            else
+            {
+                timer.Start();
+                buttonStartStop.Content = "Stoppe Animation!";
             }
         }
     }
