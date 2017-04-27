@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Canvas x:Name="zeichenfläche" HorizontalAlignment="Left" Height="250" Margin="130,39,0,0" VerticalAlignment="Top" Width="250"/>
+        <Button Content="Start!" HorizontalAlignment="Left" Margin="32,39,0,0" VerticalAlignment="Top" Width="75" Click="ButtonStart_Click"/>
+        <Button Content="Nächster Schritt!" HorizontalAlignment="Left" Margin="23,111,0,0" VerticalAlignment="Top" Width="93" Click="ButtonNächster_Click"/>
+
     </Grid>
 </Window>
