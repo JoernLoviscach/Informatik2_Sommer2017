@@ -26,7 +26,6 @@ namespace LandkarteAusEntfernungstabelle
                               new int[] { 480, 165, 155, 355 },
                               new int[] { 505, 485, 305, 615, 455 },
                               new int[] { 580, 330, 155, 525, 190, 360 }};
-
         DispatcherTimer timer = new DispatcherTimer();
         Random würfel = new Random();
         Point[] positionen;
