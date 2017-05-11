@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LandkarteAusEntfernungstabelle"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="769.656" Width="740.848">
     <Grid>
-        <Button Width="100" Height="50" Content="Start!" Margin="20,22,397,247" Click="Button_Click"/>
+        <Canvas Name="zeichenfläche" Margin="30,38,10,31"/>
     </Grid>
 </Window>
