@@ -24,12 +24,8 @@ namespace SignalverarbeitungMitKlassen
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            double[] signal = new double[2 * 44100];
-            for (int i = 0; i < signal.Length; i++)
-            {
-                signal[i] = Math.Sin(2.0 * Math.PI * 440.0 * i / 44100.0);
-            }
-            Audio.Play(signal, 44100);
+            Sinus s = new Sinus(880.0, 0.03, 44100);
+            s.SpieleAb(2);
         }
     }
 }
