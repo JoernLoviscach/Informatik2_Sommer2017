@@ -27,7 +27,12 @@ namespace SignalverarbeitungMitKlassen
             Sinus s = new Sinus(880.0, 0.03, 44100);
             Sinus t = new Sinus(723.0, 0.03, 44100);
             Mischer m = new Mischer(s, 0.5, t, 0.5);
-            m.SpieleAb(2);
+
+            string x = s.ToString();
+
+            SignalVonPlatte p = new SignalVonPlatte(@"..\..\netzspannung.raw", 48000);
+            Mischer m1 = new Mischer(p, 0.001, new Signal(48000), 0);
+            m1.SpieleAb(2);
         }
     }
 }

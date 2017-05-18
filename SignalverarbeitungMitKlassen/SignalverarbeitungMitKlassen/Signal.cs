@@ -34,6 +34,11 @@ namespace SignalverarbeitungMitKlassen
             }
             Audio.Play(signal, Abtastrate);
         }
+
+        public override string ToString()
+        {
+            return "Nullsignal";
+        }
     }
 
     class Sinus : Signal
@@ -51,6 +56,11 @@ namespace SignalverarbeitungMitKlassen
         public override double HoleSample(int index)
         {
             return amplitude * Math.Sin(2.0 * Math.PI * frequenz * index / Abtastrate);
+        }
+
+        public override string ToString()
+        {
+            return "Sinus mit Frequenz " + frequenz + " und Amplitude " + amplitude;
         }
     }
 
@@ -72,15 +82,22 @@ namespace SignalverarbeitungMitKlassen
         {
             return faktor1 * s1.HoleSample(index) + faktor2 * s2.HoleSample(index);
         }
+
+        public override string ToString()
+        {
+            return "Mischung von " + s1 + " und " + s2;
+        }
     }
 
     class SignalVonPlatte : Signal
     {
         double[] werte;
+        string datei;
 
         public SignalVonPlatte(string datei, int abtastrate)
             : base(abtastrate)
         {
+            this.datei = datei;
             BinaryReader br = new BinaryReader(File.OpenRead(datei));
             long byteZahl = br.BaseStream.Length;
             int anzahlWerte = (int)byteZahl / sizeof(double);
@@ -94,7 +111,16 @@ namespace SignalverarbeitungMitKlassen
 
         public override double HoleSample(int index)
         {
+            if(index >= werte.Length)
+            {
+                return 0.0;
+            }
             return werte[index];
+        }
+
+        public override string ToString()
+        {
+            return "Signal von Platte " + datei;
         }
     }
 }
