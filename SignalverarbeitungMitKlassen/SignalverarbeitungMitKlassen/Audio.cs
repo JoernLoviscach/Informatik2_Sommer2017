@@ -11,7 +11,7 @@ namespace SignalverarbeitungMitKlassen
     {
         public static void Play(double[] signal, int samplingRate)
         {
-            // Dies ist noch sehr unsauber.
+            // Dies ist noch sehr unsauber!
             // TODO: auf Fehler reagieren; Speicherlecks vermeiden
             // TODO: Iterator statt komplettem Array benutzen
 
