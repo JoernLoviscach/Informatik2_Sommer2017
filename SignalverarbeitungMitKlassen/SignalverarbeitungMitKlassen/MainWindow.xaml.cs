@@ -25,7 +25,9 @@ namespace SignalverarbeitungMitKlassen
         private void button_Click(object sender, RoutedEventArgs e)
         {
             Sinus s = new Sinus(880.0, 0.03, 44100);
-            s.SpieleAb(2);
+            Sinus t = new Sinus(723.0, 0.03, 44100);
+            Mischer m = new Mischer(s, 0.5, t, 0.5);
+            m.SpieleAb(2);
         }
     }
 }
