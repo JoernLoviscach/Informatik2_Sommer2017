@@ -36,7 +36,7 @@ namespace Windenergieanlagen
             {
                 double vUnten = v;
                 double vOben = v + vSchritt;
-                double leistungMitte = BestimmeLeistung_kW(0.5 * (vUnten * vOben));
+                double leistungMitte = BestimmeLeistung_kW(0.5 * (vUnten + vOben));
                 double wahrscheinlichkeit = Rayleigh(mittlereWindgeschwindkeit, vOben) - Rayleigh(mittlereWindgeschwindkeit, vUnten);
                 ertrag_kWh += wahrscheinlichkeit * 365.0 * 24.0 * leistungMitte;
             }
@@ -71,17 +71,17 @@ namespace Windenergieanlagen
 
     class BetzNennleistung : IdealeWEA
     {
-        double nennleistung;
+        double nennleistung_kW;
 
-        public BetzNennleistung(double durchmesser, double nennleistung)
+        public BetzNennleistung(double durchmesser, double nennleistung_kW)
             : base(durchmesser)
         {
-            this.nennleistung = nennleistung;
+            this.nennleistung_kW = nennleistung_kW;
         }
 
         public override double BestimmeLeistung_kW(double v)
         {
-            return Math.Min(16.0 / 27.0 * base.BestimmeLeistung_kW(v), nennleistung);
+            return Math.Min(16.0 / 27.0 * base.BestimmeLeistung_kW(v), nennleistung_kW);
         }
     }
 
@@ -104,7 +104,8 @@ namespace Windenergieanlagen
             {14.0, 4200.0},
             {30.0, 4200.0},
             {31.0, 0.0}
-        };
+        };
+
         public W127()
             : base(127.0)
         {

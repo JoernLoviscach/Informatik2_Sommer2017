@@ -25,12 +25,12 @@ namespace Windenergieanlagen
         private void button_Click(object sender, RoutedEventArgs e)
         {
             Windenergieanlage w = new W127();
-            //double x1 = w.BestimmeLeistung(1.0);
-            //double x2 = w.BestimmeLeistung(2.0);
-            //double x3 = w.BestimmeLeistung(10.0);
-            //double x4 = w.BestimmeLeistung(11.8);
-            //double x5 = w.BestimmeLeistung(31.0);
-            //double x6 = w.BestimmeLeistung(42.0);
+            //double x1 = w.BestimmeLeistung_kW(1.0);
+            //double x2 = w.BestimmeLeistung_kW(2.0);
+            //double x3 = w.BestimmeLeistung_kW(10.0);
+            //double x4 = w.BestimmeLeistung_kW(11.8);
+            //double x5 = w.BestimmeLeistung_kW(31.0);
+            //double x6 = w.BestimmeLeistung_kW(42.0);
             double x = w.BestimmeJahresenergieertrag_kWh(10.0);
 
             Windenergieanlage iw = new IdealeWEA(127.0);
