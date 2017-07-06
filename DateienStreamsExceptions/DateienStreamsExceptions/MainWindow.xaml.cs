@@ -24,17 +24,67 @@ namespace DateienStreamsExceptions
             InitializeComponent();
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        double HoleWert()
         {
-            //File.WriteAllText("bla.txt", "äöüßÄÖÜsdizfhsiufhseiuf");
-
-            string[] daten = File.ReadAllLines("daten.txt");
+            double summe = 0.0;
+            string[] daten = File.ReadAllLines("daten42.txt");
             for (int i = 0; i < daten.Length; i++)
             {
                 string[] teile = daten[i].Split(';');
-                double x = double.Parse(teile[1]);
-                // Dann etwas mit x tun.
+                summe += double.Parse(teile[1]);
             }
+            return summe;
+        }
+
+        double FindeSchnittpunktX(double m1, double b1, double m2, double b2)
+        {
+            // y1 = m1 * x + b1
+            // y2 = m2 * x + b2
+            // Schnittpunkt: m1 * x + b1 = m2 * x + b2
+            // Auflösen: x = (b2-b1) / (m1-m2)
+
+            if(Math.Abs(m1-m2) < 1e-40)
+            {
+                throw new ApplicationException("Geraden sind parallel.");
+            }
+
+            return (b2 - b1) / (m1 - m2);
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            //try
+            //{
+            //    double x = FindeSchnittpunktX(2.0, 3.0, 2.0, 3.0);
+            //    textBlock.Text = x.ToString();
+            //}
+            //catch(ApplicationException ex)
+            //{
+            //    textBlock.Text = ex.Message;
+            //}
+
+            //try
+            //{
+            //    textBlock.Text = HoleWert().ToString();
+            //}
+            //catch (System.IO.FileNotFoundException ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("Ein Fehler ist aufgetreten.");
+            //}
+
+            //File.WriteAllText("bla.txt", "äöüßÄÖÜsdizfhsiufhseiuf");
+
+            //string[] daten = File.ReadAllLines("daten.txt");
+            //for (int i = 0; i < daten.Length; i++)
+            //{
+            //    string[] teile = daten[i].Split(';');
+            //    double x = double.Parse(teile[1]);
+            //    // Dann etwas mit x tun.
+            //}
 
             // Oder: XML, JSON
 
@@ -53,14 +103,34 @@ namespace DateienStreamsExceptions
             // Read (nicht immer), C++: >> ... >> ... >>
             // Close
 
-            //Stream fs = new FileStream("test.bla", FileMode.Create);
-            //fs.WriteByte(64);
-            //fs.WriteByte(65);
-            //fs.WriteByte(66);
-            //fs.WriteByte(67);
-            //fs.Seek(2, SeekOrigin.Begin);
-            //fs.WriteByte(68);
-            //fs.Close();
+            Stream fs = null;
+            try
+            {
+                fs = new FileStream("test.bla", FileMode.Create);
+                fs.WriteByte(64);
+                fs.WriteByte(65);
+                fs.WriteByte(66);
+                fs.WriteByte(67);
+                fs.Seek(2, SeekOrigin.Begin);
+                fs.WriteByte(68);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                if(fs != null)
+                {
+                    fs.Close();
+                }
+            }
+
+            // schönere Schreibweise:
+            using (FileStream fs3 = new FileStream("test.bla", FileMode.Create))
+            {
+                fs3.WriteByte(42);
+            } // In jedem Fall wird hier Close aufgerufen.
 
             //Stream fs2 = new FileStream("test.bla", FileMode.Open);
             //int a = fs2.ReadByte();
@@ -89,13 +159,68 @@ namespace DateienStreamsExceptions
             //int h = fs.ReadByte();
             //fs.Close();
 
-            FileStream fs = new FileStream("test.gz", FileMode.Create);
-            GZipStream gs = new GZipStream(fs, CompressionMode.Compress);
-            gs.WriteByte(64);
-            gs.WriteByte(65);
-            gs.WriteByte(66);
-            gs.Close();
-            //fs.Close();
+            //FileStream fs = new FileStream("test.gz", FileMode.Create);
+            //GZipStream gs = new GZipStream(fs, CompressionMode.Compress);
+            //gs.WriteByte(64);
+            //gs.WriteByte(65);
+            //gs.WriteByte(66);
+            //gs.Close();
+            ////darin schon erledigt: fs.Close();
+
+            //FileStream fs = new FileStream("test.bla", FileMode.Create);
+            //BinaryWriter w = new BinaryWriter(fs);
+            //w.Write(true);
+            //w.Write(12.345);
+            //w.Write("abcd");
+            //w.Close(); // darin schon erledigt: fs.Close()
+            //// Exception durch: fs.WriteByte(42);
+
+            //FileStream fs2 = new FileStream("test.bla", FileMode.Open);
+            //BinaryReader r = new BinaryReader(fs2);
+            //bool a = r.ReadBoolean();
+            //double b = r.ReadDouble();
+            //string c = r.ReadString();
+            //// Exception durch: double d = r.ReadDouble();
+            //r.Close(); // darin schon erledigt: fs2.Close()
+
+            //FileStream fs = new FileStream("test.txt", FileMode.Create);
+            //StreamWriter w = new StreamWriter(fs);
+            //w.Write(true);
+            //w.Write(12.345);
+            //w.Write("abcd");
+            //w.Close();
+
+            //FileStream fs2 = new FileStream("test.txt", FileMode.Open);
+            //StreamReader r = new StreamReader(fs2);
+            //int a = r.Read();
+            //a = r.Read();
+            //a = r.Read();
+            //a = r.Read();
+            //a = r.Read();
+            //a = r.Read();
+            //a = r.Read();
+            //a = r.Read();
+            //a = r.Read();
+            //a = r.Read();
+            //a = r.Read();
+            //a = r.Read();
+            //a = r.Read();
+            //a = r.Read();
+            //a = r.Read();
+            //a = r.Read();
+            //a = r.Read();
+            //a = r.Read();
+            //a = r.Read();
+            //a = r.Read();
+            //a = r.Read();
+            //a = r.Read();
+            //a = r.Read();
+            //a = r.Read();
+            //bool z = r.EndOfStream;
+            //a = r.Read();
+            //a = r.Read();
+            //a = r.Read();
+            //r.Close();
         }
     }
 }
