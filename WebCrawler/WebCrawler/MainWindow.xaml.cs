@@ -20,6 +20,7 @@ namespace WebCrawler
     public partial class MainWindow : Window
     {
         List<string> urls = new List<string>();
+        Queue<Aufgabe> aufgaben = new Queue<Aufgabe>();
         string basisUrl = "http://www.j3L7h2.de/crawlertest/";
 
         public MainWindow()
@@ -29,21 +30,50 @@ namespace WebCrawler
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
+            aufgaben.Enqueue(new Aufgabe("0.html", 3));
+
+            while(aufgaben.Count > 0)
+            {
+                Aufgabe aufgabe = aufgaben.Dequeue();
+                ErledigeAufgabe(aufgabe);
+            }
+        }
+
+        void ErledigeAufgabe(Aufgabe aufgabe)
+        {
             WebClient c = new WebClient();
             c.Encoding = Encoding.UTF8; // TODO: Was tun, wenn nicht UTF8?
-            string s = c.DownloadString(basisUrl + "0.html");
+            string s = c.DownloadString(basisUrl + aufgabe.Url);
 
             MatchCollection m = Regex.Matches(s, "<a href=\"([^\"]*)\">");
             //TODO: In <a ...> dürfen weitere Sachen stehen! 
-            int trefferAnzahl = m.Count;
-
-            string x = m[3].Groups[1].Value;
+            for (int i = 0; i < m.Count; i++)
+            {
+                string gefundeneUrl = m[i].Groups[1].Value;
+                if (!urls.Contains(gefundeneUrl))
+                {
+                    urls.Add(gefundeneUrl);
+                    System.Diagnostics.Debug.Print(gefundeneUrl);
+                    if (aufgabe.WieVieleSchritteNoch > 1)
+                    {
+                        aufgaben.Enqueue(new Aufgabe(gefundeneUrl, aufgabe.WieVieleSchritteNoch - 1));
+                    }
+                }
+            }
         }
+    }
 
-        void SammleUrls(string url)
+    class Aufgabe
+    {
+        string url;
+        public string Url { get { return url; } }
+        int wieVieleSchritteNoch;
+        public int WieVieleSchritteNoch { get { return wieVieleSchritteNoch; } }
+
+        public Aufgabe(string url, int wieVieleSchritteNoch)
         {
-
-
+            this.url = url;
+            this.wieVieleSchritteNoch = wieVieleSchritteNoch;
         }
     }
 }
