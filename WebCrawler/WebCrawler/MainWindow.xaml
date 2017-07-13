@@ -8,6 +8,7 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="34,62,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="299" Margin="163,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="344" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
 
     </Grid>
 </Window>
