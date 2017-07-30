@@ -99,8 +99,8 @@ namespace DateienStreamsExceptions
             // Typische Methoden:
             // Open (Constructor)
             // Seek (nicht immer)
-            // Write (nicht immer), C++: << ... << ... <<
-            // Read (nicht immer), C++: >> ... >> ... >>
+            // Write (nicht immer), C++: put
+            // Read (nicht immer), C++: get
             // Close
 
             Stream fs = null;
