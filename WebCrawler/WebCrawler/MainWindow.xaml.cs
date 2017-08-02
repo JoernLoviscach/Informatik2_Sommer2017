@@ -24,6 +24,7 @@ namespace WebCrawler
         List<string> urls = new List<string>();
         ConcurrentQueue<Aufgabe> aufgaben = new ConcurrentQueue<Aufgabe>();
         string basisUrl = "http://www.j3L7h2.de/crawlertest/";
+        Object lockFürUrls = new Object();
 
         public MainWindow()
         {
@@ -36,7 +37,7 @@ namespace WebCrawler
                 threads[i] = new Thread(Arbeite);
                 threads[i].IsBackground = true;
                 threads[i].Priority = ThreadPriority.Lowest;
-                threads[i].Name = "Mein Thread Nr. " + i;
+                threads[i].Name = "Thread Nr. " + i;
                 threads[i].Start();
             }
         }
@@ -74,16 +75,21 @@ namespace WebCrawler
             for (int i = 0; i < m.Count; i++)
             {
                 string gefundeneUrl = m[i].Groups[1].Value;
-                if (!urls.Contains(gefundeneUrl))
+                lock (lockFürUrls)
                 {
-                    urls.Add(gefundeneUrl);
-                    System.Diagnostics.Debug.Print(Thread.CurrentThread.Name + " " + gefundeneUrl);
-                    Dispatcher.BeginInvoke(new Action(
-                        () => textBox.Text += " " + gefundeneUrl  
-                    ));
-                    if (aufgabe.WieVieleSchritteNoch > 1)
+                    if (!urls.Contains(gefundeneUrl))
                     {
-                        aufgaben.Enqueue(new Aufgabe(gefundeneUrl, aufgabe.WieVieleSchritteNoch - 1));
+                        urls.Add(gefundeneUrl);
+                        Dispatcher.BeginInvoke(
+                            new Action(
+                                () => textBox.Text += gefundeneUrl
+                        ));
+                        System.Diagnostics.Debug.Print(Thread.CurrentThread.Name + ": " + gefundeneUrl);
+                        // TODO: Wenn Webseite erst mit vielen Schritten gefunden, aber später mit weniger Schritten gefunden, diese tiefer weiterverfolgen!
+                        if (aufgabe.WieVieleSchritteNoch > 1)
+                        {
+                            aufgaben.Enqueue(new Aufgabe(gefundeneUrl, aufgabe.WieVieleSchritteNoch - 1));
+                        }
                     }
                 }
             }
