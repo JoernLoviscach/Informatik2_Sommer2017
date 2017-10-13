@@ -50,7 +50,7 @@ namespace GameOfLife
 
         const int anzahlZellenBreit = 30;
         const int anzahlZellenHoch = 30;
-        Rectangle[,] felder = new Rectangle[anzahlZellenBreit, anzahlZellenHoch];
+        Rectangle[,] felder = new Rectangle[anzahlZellenHoch, anzahlZellenBreit];
         DispatcherTimer timer = new DispatcherTimer();
 
         private void R_MouseDown(object sender, MouseButtonEventArgs e)
